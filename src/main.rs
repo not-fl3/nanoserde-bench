@@ -7,6 +7,23 @@ fn main() {
 
     assert_eq!(tiled_map.ty, "map");
     assert_eq!(tiled_map.layers.len(), 1);
+
+    #[cfg(feature = "nano-bin")] {
+        use nanoserde::{DeBin, SerBin};
+
+        #[derive(SerBin, DeBin)]
+        struct Message {
+            kind: String,
+            data: i32
+        }
+
+        let msg = Message {
+            kind: "Some message".to_string(),
+            data: 23
+        };
+        let bytes = SerBin::serialize_bin(&msg);
+        assert!(bytes.len() != 0);
+    }
 }
 
 #[cfg(feature = "tiled-serde")]
@@ -18,4 +35,21 @@ fn main() {
 
     assert_eq!(tiled_map.ty, "map");
     assert_eq!(tiled_map.layers.len(), 1);
+
+    #[cfg(feature = "serde-bin")] {
+        use serde::{Serialize, Deserialize};
+
+        #[derive(Serialize, Deserialize)]
+        struct Message {
+            kind: String,
+            data: i32
+        }
+
+        let msg = Message {
+            kind: "Some message".to_string(),
+            data: 23
+        };
+        let bytes = bincode::serialize(&msg).unwrap();
+        assert!(bytes.len() != 0);
+    }
 }
