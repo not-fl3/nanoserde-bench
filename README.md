@@ -61,7 +61,7 @@ Finished dev [unoptimized + debuginfo] target(s) in 30.40s
 nanoserde: 4s   
 serde: 30s
 
-## Release wasm build, json + bin
+## Release wasm build, json + bin, without  [profile.release.build-override] opt-level = 0
 
 ```
 > cargo build --features "tiled-nanoserde, nano-bin" --target wasm32-unknown-unknown --release
@@ -73,6 +73,19 @@ Finished release [optimized] target(s) in 59.35s
 
 nanoserde: 6s   
 serde: 59s
+
+## Release wasm build, json + bin, with  [profile.release.build-override] opt-level = 0
+
+```
+> cargo build --features "tiled-nanoserde, nano-bin" --target wasm32-unknown-unknown --release
+Finished release [optimized] target(s) in 5.69s
+
+> cargo build --features "tiled-serde, serde-bin" --target wasm32-unknown-unknown --release
+Finished release [optimized] target(s) in 32.91s
+```
+
+nanoserde: 6s   
+serde: 33s
 
 ## Wasm filesize, json+bin
 
