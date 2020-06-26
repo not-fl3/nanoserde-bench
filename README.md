@@ -4,6 +4,8 @@ Benching scenario - read tiled tilemap from json and than serialize some binary 
 
 Benches are just single runs on quite old machine(x230 with i5-3230M). 
 
+If build-time dependencies optimisation level is not specified in test - they was in default state (no `profile.release.build-override` section in Cargo.toml).
+
 ## Debug build, json only
 ```
 > cargo build --features "tiled-nanoserde"
@@ -25,7 +27,7 @@ Serde: 30s
 ..
 Finished release [optimized] target(s) in 6.80s
 
-> cargo build --features "tiled-nanoserde" --release --target wasm32-unknown-unknown
+> cargo build --features "tiled-serde" --release --target wasm32-unknown-unknown
 ..
 Finished release [optimized] target(s) in 58.02s
 ```
